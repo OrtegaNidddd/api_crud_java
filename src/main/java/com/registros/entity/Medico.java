@@ -27,7 +27,7 @@ public class Medico {
 	@Size(max = 50, min = 3, message = "El nombre debe tener entre 3 y 50 caracteres")
 	private String nombre;
 
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "especialidad", nullable = false)
 	private Especialidad especialidad;
 

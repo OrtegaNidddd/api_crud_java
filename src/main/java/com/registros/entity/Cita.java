@@ -40,11 +40,11 @@ public class Cita {
 	private LocalTime horaCita;
 
 	// FK
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "paciente", nullable = false)
 	private Paciente paciente;
 
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "medico", nullable = false)
 	private Medico medico;
 
