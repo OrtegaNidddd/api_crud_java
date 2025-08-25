@@ -6,6 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.registros.entity.Especialidad;
+import com.registros.repository.EspecialidadRepository;
+
 import com.registros.entity.Medico;
 import com.registros.repository.MedicoRepository;
 
@@ -15,8 +18,16 @@ public class MedicoService {
 	@Autowired
 	private MedicoRepository medicoRepository;
 
-	public Medico guardar(Medico medico) {
-		return medicoRepository.save(medico);
+	@Autowired
+	private EspecialidadRepository especialidadRepository;
+
+	public Medico guardar(Medico request) {
+
+		Especialidad idEspecialidad = especialidadRepository.findById(request.getEspecialidad().getId()).orElse(null);
+
+		request.setEspecialidad(idEspecialidad);
+
+		return medicoRepository.save(request);
 	}
 
 	public List<Medico> listar() {
@@ -38,8 +49,10 @@ public class MedicoService {
 
 			// Cambio de especialidad
 			/*
+			 * 
 			 * if (request.getEspecialidad() != null) {
 			 * nuevo.setEspecialidad(request.getEspecialidad()); }
+			 * 
 			 */
 
 			return medicoRepository.save(nuevo);
