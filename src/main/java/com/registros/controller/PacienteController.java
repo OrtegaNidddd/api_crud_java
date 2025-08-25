@@ -47,7 +47,7 @@ public class PacienteController {
 
 		} catch (Exception e) {
 
-			response.put("mensaje", "Error en la creacion del paquete");
+			response.put("mensaje", "Error en la creacion de la especialidad");
 			response.put("error", e.getMessage());
 			response.put("status", HttpStatus.NOT_FOUND.value());
 
