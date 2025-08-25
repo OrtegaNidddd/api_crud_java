@@ -23,7 +23,7 @@ public class MedicoService {
 
 	public Medico guardar(Medico request) {
 
-		Especialidad idEspecialidad = especialidadRepository.findById(request.getEspecialidad().getId()).orElse(null);
+		Especialidad idEspecialidad = especialidadRepository.findById(request.getEspecialidad().getId()).orElseThrow(() -> new RuntimeException("Especialidad no encontrada"));
 
 		request.setEspecialidad(idEspecialidad);
 
