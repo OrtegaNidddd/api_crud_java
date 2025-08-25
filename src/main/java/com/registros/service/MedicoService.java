@@ -1,7 +1,6 @@
 package com.registros.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,31 +34,20 @@ public class MedicoService {
 	}
 
 	public Medico get(Integer id) {
-		return medicoRepository.findById(id).orElse(null);
+		return medicoRepository.findById(id).orElseThrow(() -> new RuntimeException("Medico no encontrado"));
 	}
 
 	public Medico update(Integer id, Medico request) {
 
-		Optional<Medico> m = medicoRepository.findById(id);
+		Medico medico = medicoRepository.findById(id).orElseThrow(() -> new RuntimeException("Medico no encontrado"));
 
-		if (m.isPresent()) {
-			Medico nuevo = m.get();
+		Especialidad idEspecialidad = especialidadRepository.findById(request.getEspecialidad().getId()).orElseThrow(() -> new RuntimeException("Especialidad no encontrada"));
 
-			nuevo.setNombre(request.getNombre());
-
-			// Cambio de especialidad
-			/*
-			 * 
-			 * if (request.getEspecialidad() != null) {
-			 * nuevo.setEspecialidad(request.getEspecialidad()); }
-			 * 
-			 */
-
-			return medicoRepository.save(nuevo);
-
-		} else {
-			return null;
-		}
+		medico.setNombre(request.getNombre());
+		medico.setEspecialidad(idEspecialidad);
+		
+		return medicoRepository.save(medico);
+	
 	}
 
 	public boolean eliminar(Integer id) {
