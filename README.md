@@ -109,10 +109,9 @@ src/main/java/com/registros/
 }
 ```
 
-Respuesta:
+**GET** `/api/citas`
 ```json
 {
-  "mensaje": "Cita creada correctamente",
   "cita": {
     "id": 1,
     "estado": 1,
